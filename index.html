@@ -1,257 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CollegeBoard — Sample Homepage (Educational Clone)</title>
-  <meta name="description" content="An educational, no-brand clone of a College Board–style homepage for practice." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Demo</title>
   <style>
-    :root {
-      --cb-blue: #1b3a6f;        /* deep brandlike blue (not exact) */
-      --cb-blue-600: #234b90;
-      --cb-blue-500: #2f60b5;
-      --cb-blue-100: #e8effd;
-      --cb-yellow: #ffd166;      /* accent */
-      --ink: #0f172a;            /* slate-900 */
-      --ink-700: #334155;        /* slate-600 */
-      --ink-500: #64748b;        /* slate-500 */
-      --bg: #ffffff;
-      --muted: #f6f7fb;
-      --ring: rgba(47, 96, 181, .35);
-      --radius: 14px;
-      --shadow: 0 10px 25px rgba(0,0,0,.08), 0 2px 8px rgba(0,0,0,.06);
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
     body {
-      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      color: var(--ink); background: var(--bg);
-      line-height: 1.4; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
     }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(1200px, 92%); margin: 0 auto; }
-
-    /* Top utility bar */
-    .util { background: var(--cb-blue); color: #fff; font-size: 14px; }
-    .util .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0; }
-    .util a { opacity: .95; }
-    .util a:hover { text-decoration: underline; }
-
-    /* Header */
-    header.header { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.06); }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; }
-    .brand .logo {
-      width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--cb-blue-500), var(--cb-blue));
-      display: grid; place-items: center; color: #fff; font-weight: 900;
-      box-shadow: 0 6px 14px rgba(27,58,111,.25);
+    .hero {
+      background: #0084d4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      flex-wrap: wrap;
     }
-
-    .navlinks { display: flex; gap: 16px; align-items: center; }
-    .navlinks a { padding: 10px 12px; border-radius: 10px; font-weight: 600; color: var(--ink-700); }
-    .navlinks a:hover { background: var(--muted); }
-
-    .actions { display: flex; gap: 10px; align-items: center; }
-    .btn { appearance: none; border: 0; padding: 10px 14px; border-radius: 12px; font-weight: 700; cursor: pointer; }
-    .btn.primary { background: var(--cb-blue-500); color: #fff; box-shadow: 0 6px 16px rgba(47,96,181,.25); }
-    .btn.primary:hover { background: var(--cb-blue-600); }
-    .btn.ghost { background: transparent; color: var(--cb-blue-500); }
-    .btn.ghost:hover { background: var(--cb-blue-100); }
-
-    /* Mobile button */
-    .hamburger { display: none; background: transparent; border: 0; padding: 10px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; }
-
-    /* Mobile drawer */
-    .drawer { display: none; background: #fff; border-top: 1px solid #e5e7eb; }
-    .drawer a { display: block; padding: 14px 8px; border-bottom: 1px solid #eef0f5; color: var(--ink-700); font-weight: 600; }
-
-    /* Hero */
-    .hero { background: radial-gradient(1200px 500px at 85% -50%, #e6eeff 10%, rgba(230,238,255,0) 60%),
-                       linear-gradient(0deg, #f7f9ff, #ffffff);
-             border-bottom: 1px solid #eef1f7; }
-    .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 36px; align-items: center; padding: 40px 0 28px; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.05; margin: 0 0 10px; letter-spacing: -.3px; }
-    .hero p { color: var(--ink-700); font-size: 18px; margin: 0 0 18px; }
-    .search { display: flex; gap: 10px; }
-    .search input { flex: 1; padding: 14px 14px; border-radius: 12px; border: 1px solid #d7dbe7; font-size: 16px; }
-    .search input:focus { outline: 3px solid var(--ring); border-color: var(--cb-blue-500); }
-
-    .hero-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
-    .kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 12px; }
-    .kpis .kpi { background: var(--muted); border-radius: 12px; padding: 14px; text-align: center; }
-    .kpi .num { font-weight: 900; font-size: 22px; }
-    .kpi .lbl { color: var(--ink-500); font-size: 13px; }
-
-    /* Quick tiles */
-    .tiles { padding: 30px 0; }
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
-    .tile { background: #fff; border: 1px solid #e7ebf4; border-radius: var(--radius); padding: 18px; box-shadow: 0 2px 6px rgba(0,0,0,.03); transition: transform .2s ease, box-shadow .2s ease; }
-    .tile:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.08); }
-    .tile h3 { margin: 8px 0 6px; font-size: 18px; }
-    .tile p { margin: 0; color: var(--ink-700); font-size: 14px; }
-    .chip { display: inline-block; background: var(--cb-blue-100); color: var(--cb-blue-500); border-radius: 999px; font-weight: 700; font-size: 12px; padding: 6px 10px; }
-
-    /* Featured band */
-    .band { background: linear-gradient(0deg, #f7f9ff, #ffffff); border-top: 1px solid #eef1f7; border-bottom: 1px solid #eef1f7; }
-    .band .wrap { padding: 34px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
-    .band h2 { margin: 0 0 6px; font-size: clamp(22px, 3vw, 32px); }
-    .band p { margin: 0 0 14px; color: var(--ink-700); }
-    .card { background: #fff; border: 1px solid #e7ebf4; border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px; }
-
-    /* News/updates */
-    .news { padding: 30px 0; }
-    .news h2 { margin: 0 0 12px; }
-    .newslist { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .newsitem { background: #fff; border: 1px solid #e7ebf4; border-radius: var(--radius); padding: 16px; position: relative; overflow: hidden; }
-    .newsitem time { display: block; font-size: 12px; color: var(--ink-500); margin-bottom: 6px; }
-    .newsitem h3 { margin: 0 0 8px; font-size: 17px; }
-    .newsitem a.more { color: var(--cb-blue-500); font-weight: 700; }
-
-    /* CTA stripe */
-    .cta { padding: 28px 0; background: linear-gradient(90deg, var(--cb-blue) 0%, var(--cb-blue-500) 100%); color: #fff; }
-    .cta .wrap { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
-    .cta h3 { margin: 0; font-size: clamp(18px, 2.4vw, 24px); }
-
-    /* Footer */
-    footer { background: #0b1c39; color: #dae3ff; margin-top: 24px; }
-    footer .wrap { padding: 28px 0; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 18px; }
-    footer h4 { margin: 0 0 10px; color: #fff; }
-    footer a { display: block; color: #cbd5e1; padding: 6px 0; font-size: 14px; }
-    footer a:hover { color: #fff; }
-    .legal { border-top: 1px solid rgba(255,255,255,.12); color: #94a3b8; font-size: 13px; padding: 12px 0 20px; }
-
-    /* Responsive */
-    @media (max-width: 980px) {
-      .hero .wrap { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: repeat(2, 1fr); }
-      .newslist { grid-template-columns: repeat(2, 1fr); }
-      .band .wrap { grid-template-columns: 1fr; }
-      footer .wrap { grid-template-columns: 1fr 1fr; }
+    .hero img {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 50%;
     }
-    @media (max-width: 680px) {
-      .navlinks, .actions { display: none; }
-      .hamburger { display: inline-block; }
-      .grid { grid-template-columns: 1fr; }
-      .newslist { grid-template-columns: 1fr; }
-      footer .wrap { grid-template-columns: 1fr; }
-      .kpis { grid-template-columns: 1fr 1fr; }
+    .signin-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      max-width: 280px;
+      margin-left: 30px;
+    }
+    .signin-box h2 {
+      margin-top: 0;
+      text-align: center;
+      font-size: 20px;
+      color: #333;
+    }
+    .signin-box p {
+      font-size: 14px;
+      color: #444;
+      text-align: center;
+    }
+    .signin-box button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: bold;
+      background: #ffd600;
+      cursor: pointer;
+    }
+    .signin-box button:hover {
+      background: #ffcd00;
+    }
+    .signin-box a {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+      font-size: 14px;
+      color: #000;
+      text-decoration: underline;
+    }
+    .content {
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .content p {
+      max-width: 400px;
+      font-size: 20px;
+      color: #333;
+      border-top: 3px solid #0070c9;
+      padding-top: 10px;
     }
   </style>
 </head>
 <body>
-  <!-- Utility bar -->
-  <div class="util">
-    <div class="container wrap">
-      <div>Student & Educator resources</div>
-      <div style="display:flex; gap:16px; align-items:center">
-        <a href="#">Sign in</a>
-        <span aria-hidden="true">•</span>
-        <a href="#">Create account</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header class="header" role="banner">
-    <div class="container nav">
-      <a class="brand" href="#" aria-label="Homepage">
-        <span class="logo" aria-hidden="true">CB</span>
-        <span>CollegeBoard</span>
-      </a>
-
-      <nav class="navlinks" aria-label="Primary">
-        <a href="#sat">SAT</a>
-        <a href="#ap">AP</a>
-        <a href="#planning">College Planning</a>
-        <a href="#bigfuture">BigFuture</a>
-        <a href="#help">Help</a>
-      </nav>
-
-      <div class="actions">
-        <button class="btn ghost" aria-label="Search site" onclick="document.getElementById('q').focus()">Search</button>
-        <button class="btn primary">Sign In</button>
-      </div>
-
-      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" onclick="toggleMenu(this)">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-    <div id="drawer" class="drawer" hidden>
-      <div class="container">
-        <a href="#sat">SAT</a>
-        <a href="#ap">AP</a>
-        <a href="#planning">College Planning</a>
-        <a href="#bigfuture">BigFuture</a>
-        <a href="#help">Help</a>
-        <a href="#signin">Sign In</a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
   <section class="hero">
-    <div class="container wrap">
-      <div>
-        <h1>Plan, prepare, and find your next step.</h1>
-        <p>Explore assessments, advanced coursework, and planning tools designed to help students move confidently from high school to what comes next.</p>
-        <form class="search" role="search" aria-label="Site search" onsubmit="event.preventDefault(); alert('Pretend to search for: '+document.getElementById('q').value)">
-          <input id="q" name="q" type="search" placeholder="Search SAT, AP, scholarships, and more" autocomplete="off" />
-          <button class="btn primary" type="submit">Search</button>
-        </form>
-
-        <div class="kpis" aria-label="Highlights">
-          <div class="kpi"><div class="num">2k+</div><div class="lbl">AP courses offered by schools</div></div>
-          <div class="kpi"><div class="num">6M+</div><div class="lbl">students use planning tools</div></div>
-          <div class="kpi"><div class="num">190+</div><div class="lbl">countries & territories</div></div>
-        </div>
-      </div>
-
-      <aside class="hero-card" aria-labelledby="quick-actions-title">
-        <h2 id="quick-actions-title" style="margin:0 0 10px">Quick actions</h2>
-        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
-          <a class="tile" href="#sat">
-            <span class="chip">SAT</span>
-            <h3>Register for the SAT</h3>
-            <p>Find test dates, deadlines, and digital SAT practice.</p>
-          </a>
-          <a class="tile" href="#ap">
-            <span class="chip">AP</span>
-            <h3>AP Students</h3>
-            <p>Check AP Classroom, deadlines, and exam help.</p>
-          </a>
-          <a class="tile" href="#bigfuture">
-            <span class="chip">BigFuture</span>
-            <h3>Search for colleges</h3>
-            <p>Compare programs, costs, and scholarships.</p>
-          </a>
-          <a class="tile" href="#help">
-            <span class="chip">Help</span>
-            <h3>Get account help</h3>
-            <p>Recover username, reset password, and more.</p>
-          </a>
-        </div>
-      </aside>
+    <img src="https://via.placeholder.com/250" alt="Students with laptop">
+    <div class="signin-box">
+      <h2>Sign In</h2>
+      <p>Which type of account do you want to sign in to?</p>
+      <button>Student</button>
+      <button>Educator</button>
+      <a href="#">Create Account</a>
     </div>
   </section>
 
-  <!-- Tiles -->
-  <section class="tiles container" id="sat" aria-label="Popular links">
-    <div class="grid">
-      <a class="tile" href="#">
-        <h3>Digital SAT Practice</h3>
-        <p>Try a full-length practice test and see score insights.</p>
-      </a>
-      <a class="tile" href="#">
-        <h3>Find SAT Test Dates</h3>
-        <p>See upcoming administrations and registration windows.</p>
-      </a>
-      <a class="tile" href="#">
-        <h3>AP Credit Policies</h3>
-        <p>See how colleges award credit for AP Exam scores.</p>
-      </a>
-      <a class="tile" href="#">
-        <h3>Scholarships</h3>
-        <p>Explore awards that match your interests and profile.</p>
+  <section class="content">
+    <p>
+      Sign in to access your AP or Pre-AP resources and tools including AP Classroom.
+    </p>
+  </section>
+</body>
+</html>
