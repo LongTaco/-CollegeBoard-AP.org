@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,34 +19,45 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 60px 20px 40px;
+      /* padding: 60px 20px 40px; */
       flex-wrap: wrap;
       position: relative;
     }
 
     .hero img {
-      width: 260px;
-      height: 260px;
+      width: 400px;
+      height: 387px;
       object-fit: cover;
       border-radius: 50%;
+      margin-top: 0px;
+      margin-left: -500px;
     }
 
     /* Sign-in box (overlaps blue and white) */
     .signin-box {
+      top: 42px;
+      left: 812px;
+      width: 459px;
+      height: 377px;
       background: #fff;
-      padding: 25px 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      width: 280px;
-      margin-left: 40px;
-      margin-top: 40px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      margin-left: 155px;
+      /* margin-top: 0px; */
       text-align: center;
-      border-radius: 0; /* sharp edges */
-      position: relative;
-      top: 30px; /* pushes it down to overlap */
+      border-radius: 0;
+      /* sharp edges */
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0px;
+      border: 1px solid #ccc;
     }
 
     .signin-box h2 {
-      font-family: Georgia, serif; /* matches official font feel */
+      font-family: Arial, serif;
+      /* matches official font feel */
       font-size: 20px;
       margin: 0 0 10px;
       font-weight: bold;
@@ -60,13 +72,12 @@
 
     /* Buttons */
     .signin-box button {
-      display: block;
-      width: 100%;
-      padding: 10px 0;
+      display: inline-block;
+      width: 200px;
+      height: 50px;
       margin: 10px 0;
       border: none;
-      border-radius: 0; /* sharp corners */
-      font-size: 15px;
+      font-size: 17px;
       font-weight: bold;
       background: #ffd400;
       cursor: pointer;
@@ -85,29 +96,32 @@
     }
 
     /* Content section */
-    .content {
-      display: flex;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
     .content p {
-      max-width: 420px;
-      font-size: 20px;
-      line-height: 1.4;
-      color: #333;
-      font-family: Georgia, serif; /* serif for description */
+      position: absolute;
+      top: 390px;
+      left: 380px;
+      width: 460px;
+      line-height:50px;
+      font-family: Arial, serif;
       border-top: 3px solid #0066cc;
       padding-top: 12px;
+      font-size: 45px;
+      color: #5a5a5a;
+      font-family: Arial, serif;
+      /* serif for description */
+      border-top: 8px solid #0066cc;
+      padding-top: 12px;
     }
+
   </style>
 </head>
+
 <body>
   <section class="hero">
     <img src="images/students-with-laptop.png" alt="Students with laptop">
     <div class="signin-box">
       <h2>Sign In</h2>
-      <p>Which type of account do you want to sign in to?</p>
+      <p>Which type of account do you <br> want to sign in to?</p>
       <button>Student</button>
       <button>Educator</button>
       <a href="#">Create Account</a>
@@ -120,4 +134,5 @@
     </p>
   </section>
 </body>
+
 </html>
