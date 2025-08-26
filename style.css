@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #333;
+}
+
+/* Hero section */
+.hero {
+    background: #0094e0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* padding: 60px 20px 40px; */
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.hero img {
+    width: 400px;
+    height: 387px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-left: -500px;
+}
+
+/* Sign-in box (overlaps blue and white) */
+.signin-box {
+    top: 42px;
+    right: 20%;
+    width: 459px;
+    height: 377px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    margin-left: 155px;
+    /* margin-top: 0px; */
+    text-align: center;
+    border-radius: 0;
+    /* sharp edges */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    border: 1px solid #ccc;
+}
+
+.signin-box h2 {
+    font-family: Arial, serif;
+    /* matches official font feel */
+    font-size: 20px;
+    margin: 0 0 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.signin-box p {
+    font-size: 14px;
+    color: #444;
+    margin: 0 0 15px;
+}
+
+/* Buttons */
+.signin-box button {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    margin: 10px 0;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    background: #ffd400;
+    cursor: pointer;
+}
+
+.signin-box button:hover {
+    background: #ffc800;
+}
+
+.signin-box a {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #000;
+    text-decoration: underline;
+}
+
+/* Content section */
+.content p {
+    position: absolute;
+    top: 390px;
+    left: 380px;
+    width: 460px;
+    line-height: 50px;
+    font-family: Arial, serif;
+    border-top: 3px solid #0066cc;
+    padding-top: 12px;
+    font-size: 45px;
+    color: #5a5a5a;
+    font-family: Arial, serif;
+    /* serif for description */
+    border-top: 8px solid #0066cc;
+    padding-top: 12px;
+}
