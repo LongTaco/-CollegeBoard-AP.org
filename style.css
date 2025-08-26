@@ -103,4 +103,14 @@ body {
     /* serif for description */
     border-top: 8px solid #0066cc;
     padding-top: 12px;
+
 }
+
+.disclaimer-link {
+        position: fixed;
+        bottom: 15px;
+        right: 20px;
+        font-size: 14px;
+        text-decoration: underline;
+        z-index: 1000;
+    }
