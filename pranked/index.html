@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vortex of Confusion</title>
+    <style>
+        :root {
+            --bg: #001b33;
+            /* deep navy */
+            --ink: #fff8e7;
+            /* light cream */
+            --teal: #66B2B2;
+            --orange: #FFA500;
+            --blue: #003366;
+            --accent: #b6f0ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(1200px 800px at 60% -10%, rgba(255, 165, 0, .2), transparent 60%),
+                radial-gradient(900px 600px at -20% 80%, rgba(102, 178, 178, .18), transparent 60%),
+                var(--bg);
+            color: var(--ink);
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            overflow: hidden;
+        }
+
+        /* Spinning conic vortex */
+        .vortex {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            filter: blur(2px) saturate(140%);
+        }
+
+        .vortex::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: conic-gradient(from 0deg,
+                    rgba(255, 165, 0, .06), rgba(0, 0, 0, 0) 10%,
+                    rgba(102, 178, 178, .08) 20%, rgba(0, 0, 0, 0) 30%,
+                    rgba(255, 165, 0, .06) 40%, rgba(0, 0, 0, 0) 50%,
+                    rgba(102, 178, 178, .09) 60%, rgba(0, 0, 0, 0) 70%,
+                    rgba(255, 165, 0, .06) 80%, rgba(0, 0, 0, 0) 90%,
+                    rgba(102, 178, 178, .08) 100%);
+            border-radius: 50%;
+            animation: spin 8s linear infinite;
+            /* faster spin */
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes floaty {
+            0% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(0)
+            }
+
+            25% {
+                transform: rotate(2deg)
+            }
+
+            75% {
+                transform: rotate(-2deg)
+            }
+        }
+
+        main {
+            position: relative;
+            max-width: 900px;
+            margin: 8vh auto;
+            padding: clamp(16px, 3vw, 32px);
+            text-align: center;
+            backdrop-filter: blur(6px) saturate(120%);
+            background: color-mix(in oklab, #001b33 80%, rgba(255, 255, 255, .06));
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 28px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, .45);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-weight: 900;
+            font-size: clamp(28px, 6vw, 64px);
+            line-height: 1.02;
+            letter-spacing: 0.5px;
+            background: linear-gradient(180deg, var(--ink), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 16px rgba(255, 255, 255, .08);
+        }
+
+        .badge {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 6px 12px;
+            font-size: clamp(12px, 2.5vw, 16px);
+            color: #031a2c;
+            background: linear-gradient(90deg, var(--orange), var(--teal));
+            border-radius: 999px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            box-shadow: 0 8px 20px rgba(255, 165, 0, .25), 0 8px 24px rgba(102, 178, 178, .25);
+            animation: wiggle 2.8s ease-in-out infinite;
+        }
+
+        p.lede {
+            font-size: clamp(16px, 2.9vw, 22px);
+            margin: 8px auto 22px;
+            color: #dfe9f6;
+            max-width: 60ch;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        button,
+        a.button {
+            appearance: none;
+            border: 0;
+            cursor: pointer;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 16px;
+            letter-spacing: .3px;
+            background: #0a3359;
+            color: var(--ink);
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+            transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
+        }
+
+        button:hover,
+        a.button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, .45);
+        }
+
+        .primary {
+            background: linear-gradient(180deg, #0d3f73, #0b2e55);
+        }
+
+        .success {
+            background: linear-gradient(180deg, #0b4d4d, #083c3c);
+        }
+
+        .danger {
+            background: linear-gradient(180deg, #6a2a00, #4e1f00);
+        }
+
+        /* Floating math glyphs */
+        .math-soup {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: .85;
+        }
+
+        .math-soup span {
+            position: absolute;
+            font-weight: 900;
+            color: rgba(255, 255, 255, .12);
+            font-size: clamp(18px, 4vw, 48px);
+            animation: floaty 6s ease-in-out infinite;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, .35);
+        }
+
+        details.tips {
+            margin: 24px auto 0;
+            text-align: left;
+            max-width: 65ch;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 16px;
+            padding: 14px 16px;
+        }
+
+        details.tips summary {
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        details.tips ul {
+            line-height: 1.55;
+            margin: 10px 0 0 22px;
+        }
+
+        code.kbd {
+            font-weight: 800;
+            background: rgba(0, 0, 0, .35);
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        footer {
+            margin-top: 18px;
+            font-size: 12px;
+            opacity: .75;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .vortex::before,
+            .math-soup span,
+            .badge {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="vortex" aria-hidden="true"></div>
+    <div class="math-soup" aria-hidden="true"></div>
+
+    <main aria-live="polite">
+        <span class="badge">Vortex of Confusion</span>
+        <h1>You just got <em style="font-style:inherit;color:var(--orange)">phished</em> by the VORTEX of CONFUSION</h1>
+        <p class="lede">Don’t worry — this is a harmless prank page. No data was collected, and nothing was installed.
+            Take 20 seconds to learn how to spot the real thing.</p>
+
+        <div class="buttons">
+            <button class="primary" id="toggleTips">Learn to spot phishing</button>
+            <button class="danger" id="stopMotion">Too spinny — tone it down</button>
+            <a class="button" id="copyLink" href="#">Copy prank link</a>
+        </div>
+
+        <details class="tips" id="tips">
+            <summary>Quick safety checklist</summary>
+            <ul>
+                <li><strong>Check the URL</strong>: fake pages often use look-alike domains. When in doubt, type the
+                    site manually.</li>
+                <li><strong>HTTPS ≠ safe</strong>: a lock icon only means encrypted — not trustworthy by itself.</li>
+                <li><strong>Never enter credentials from a link in email/text</strong>. Go directly to the service’s
+                    official site/app.</li>
+                <li><strong>Look for urgency or threats</strong>: “verify now or lose access” is a classic red flag.
+                </li>
+                <li><strong>Enable MFA/2FA</strong>: even if you slip up, it can block the login.</li>
+            </ul>
+        </details>
+
+        <footer>
+            Built for laughs and learning. This page stores no personal data. ♥
+        </footer>
+    </main>
+
+    <script>
+        const GLYPHS = ["∫", "Δ", "π", "∞", "θ", "sin θ", "cos θ", "tan θ", "√x", "Σ", "lim→", "d/dx"];
+        const soup = document.querySelector('.math-soup');
+        function tossGlyph() {
+            const el = document.createElement('span');
+            el.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = Math.random() * 100 + 'vh';
+            el.style.animationDuration = (3 + Math.random() * 3) + 's';
+            el.style.opacity = (0.08 + Math.random() * 0.15).toFixed(2);
+            soup.appendChild(el);
+            setTimeout(() => el.remove(), 10000);
+        }
+        for (let i = 0; i < 30; i++) tossGlyph();
+        setInterval(tossGlyph, 700);
+
+        const tips = document.getElementById('tips');
+        document.getElementById('toggleTips').addEventListener('click', () => tips.open = !tips.open);
+        document.getElementById('stopMotion').addEventListener('click', () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            document.querySelector('.vortex')?.style.setProperty('display', 'none');
+            Array.from(document.querySelectorAll('.math-soup span')).forEach(s => s.style.animation = 'none');
+            const style = document.createElement('style');
+            style.textContent = '*{animation: none !important; transition: none !important}';
+            document.head.appendChild(style);
+        });
+
+        document.getElementById('copyLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            navigator.clipboard.writeText(location.href).then(() => {
+                const btn = e.currentTarget; const old = btn.textContent;
+                btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = old, 1200);
+            }).catch(() => {
+                alert('Copy failed. Manually copy the address bar.');
+            });
+        });
+    </script>
+</body>
+
+</html>
